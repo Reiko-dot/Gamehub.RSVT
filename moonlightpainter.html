@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Moonlight Painter — CozyGames</title>
+  <link rel="stylesheet" href="css/painter.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="cozylogo.png" alt="CozyGames logo" class="logo" onerror="this.style.display='none'">
+    <h1>🌙 Moonlight Painter</h1>
+    <p class="subtitle">Paint your dreams under the moonlight ✨</p>
+  </header>
+
+  <main class="main">
+    <div class="toolbar">
+      <div class="controls">
+        <label>🎨 Color: <input type="color" id="colorPicker" value="#c3b3ff"></label>
+        <label>🖌️ Brush: <input type="range" id="brushSize" min="2" max="60" value="12"></label>
+        <label>🌈 Glow: <input type="checkbox" id="glowToggle" checked></label>
+      </div>
+
+      <div class="actions">
+        <button id="eraser" class="btn subtle">🧽 Eraser</button>
+        <button id="undo" class="btn subtle">↩️ Undo</button>
+        <button id="redo" class="btn subtle">↪️ Redo</button>
+        <button id="clear" class="btn">🧺 Clear</button>
+        <button id="save" class="btn subtle">💾 Save</button>
+       <button class="menu-btn" onclick="window.location.href='index.html'">🏠 Menu</button>
+      </div>
+
+      <div class="theme-switch">
+        <label>🪄 Theme:
+          <select id="themeSelect">
+            <option value="night">Moonlight</option>
+            <option value="dawn">Soft Dawn</option>
+            <option value="lavender">Lavender Field</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <canvas id="paintCanvas" width="900" height="600"></canvas>
+  </main>
+
+  <footer class="footer">
+    <small>CozyGames • Moonlight Painter • 2025</small>
+  </footer>
+
+  
+
+  <script src="js/painter.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a2e; /* Deep purple background for a calming effect */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #e9e6ff;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #25264a;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            /* Flex properties for better vertical canvas fit */
+            display: flex; 
+            flex-direction: column;
+            height: 90vh; /* Increased from 85vh, relying on smaller buttons to save space */
+        }
+        canvas {
+            display: block;
+            background-color: #4A3D4C; /* Soil color now covers the whole canvas */
+            border-radius: 0.75rem;
+            margin-top: 10px; /* Reduced margin */
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+            touch-action: none; /* Prevents unwanted scrolling on touch devices */
+            cursor: crosshair; /* Default cursor for planting */
+            flex-grow: 1; /* Allow canvas to fill available vertical space */
+        }
+        /* Adjusted control button size for more canvas room */
+        .control-button {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 0.5rem 1rem; /* Reduced padding */
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            margin: 4px 0; /* Reduced margin */
+            font-size: 0.9rem; /* Slightly smaller text */
+            border: 2px solid transparent;
+            color: #69698d; /* Dark text for contrast against bright flower colors */
+            text-decoration: none; /* Important for the anchor tag button */
+            display: inline-flex; /* Ensures text and icon line up for anchor tag button */
+            align-items: center;
+            justify-content: center;
+            line-height: 1.25;
+        }
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        /* Style for the selected button */
+        .control-button.selected {
+            border-color: #fce300; /* Bright yellow ring to indicate selection */
+            box-shadow: 0 0 15px rgba(252, 227, 0, 0.8);
+        }
+
+        /* Message Box Styling - Updated for non-intrusive 'toast' style */
+        #message-box {
+            position: fixed;
+            bottom: 20px; /* Start position */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            background-color: rgba(69, 10, 104, 0.95); /* Darker, less distracting background */
+            padding: 12px 25px;
+            border-radius: 9999px; /* Pill shape */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: #e9e6ff;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, bottom 0.5s ease;
+        }
+        #message-box.visible {
+            opacity: 1;
+            bottom: 30px; /* Slight slide up when visible */
+            pointer-events: auto;
+        }

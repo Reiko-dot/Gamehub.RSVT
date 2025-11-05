@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 Star Hopper</title>
+  <link rel="stylesheet" href="css/star.css">
+</head>
+<body>
+  <div class="background">
+    <canvas id="sparkles"></canvas>
+  </div>
+
+  <header>
+    <h1>🌟 Star Hopper</h1>
+    <p class="subtitle">Hop through the dreamy sky and collect stars!</p>
+  </header>
+
+  <main>
+    <canvas id="starCanvas" width="400" height="400"></canvas>
+
+    <div id="hud">
+      <span id="scoreDisplay">Score: 0</span>
+      <span id="bestDisplay">Best: 0</span>
+      <span id="timeDisplay">Time: 60s</span>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">🚀 Start Game</button>
+      <button onclick="restartGame()">🔄 Restart</button>
+      <button onclick="window.location.href='index.html'">🏠 Back to Hub</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with 💫 by You</p>
+  </footer>
+
+  <script src="js/star.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/garden.css">
+    <title>Garden Whisperer</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center mb-1">🌿 Garden Whisperer 🌸</h1> <!-- Reduced margin -->
+        <p class="text-center text-xs mb-3 text-indigo-300"> <!-- Smaller font and reduced margin -->
+            **1. Select a seed type, then click in the soil to plant.** **2. Click 'Water Mode' to quickly water your
+            plants!**<br>
+            **you need to plant the seeds next to each other to grow flowers!** **Planting 8 is the max!**<br>
+            Enjoy nurturing your virtual garden! 🌻
+        </p>
+
+        <body>
+
+        <div class="flex flex-col items-center mb-3"> <!-- Reduced margin -->
+            <p class="font-semibold mb-2 text-lg">Current Seed: <span id="selected-seed-display" class="text-gray-400 font-bold">None Selected</span></p>
+
+            <div class="flex flex-wrap justify-center gap-2"> <!-- Removed bottom margin here -->
+                
+                <!-- NEW Menu Button (Added as a link) -->
+                <a href="index.html" class="control-button bg-red-500 hover:bg-red-600 transition duration-150 ease-in-out">
+                    🏠 Menu
+                </a>
+
+                <!-- Flower Selection Buttons -->
+                <div id="flower-buttons-container" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons are injected here by JS -->
+                </div>
+                
+                <!-- Water Toggle Button -->
+                <button id="water-button" class="control-button bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out">
+                    💧 Water Mode: OFF
+                </button>
+
+                <!-- NEW Clear Garden Button -->
+                <button id="clear-button" class="control-button bg-red-500 hover:bg-red-600 transition duration-150 ease-in-out">
+                    Clear Garden 🗑️
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Wrapper adjusted to take flexible height -->
+        <div class="w-full" style="flex-grow: 1; min-height: 40vh;">
+            <canvas id="gardenCanvas" class="w-full h-full"></canvas>
+        </div>
+    </div>
+
+    <!-- Custom Message Box (instead of alert) -->
+    <div id="message-box" role="alert"></div>
+
+    <script src="js/garden.js"></script>
+</body>
+
+</html>

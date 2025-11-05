@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #fff;
+  background: radial-gradient(ellipse at bottom, #0a0a2a 0%, #000 100%);
+  overflow: hidden;
+}
+
+header {
+  margin-top: 20px;
+}
+
+.subtitle {
+  color: #9faaff;
+  margin-top: -5px;
+}
+
+#starCanvas {
+  background: transparent;
+  border: 2px solid #7b89ff;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+#hud {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffd700;
+}
+
+.controls {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+button {
+  background: #7b89ff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #a1b3ff;
+}
+
+footer {
+  margin-top: 30px;
+  color: #aaa;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+canvas#sparkles {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

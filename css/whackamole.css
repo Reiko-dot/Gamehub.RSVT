@@ -1,0 +1,80 @@
+ body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .menu-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #ffffffaa;
+      color: #ff4b5c;
+      border: 2px solid #ff4b5c;
+      border-radius: 10px;
+      padding: 0.4rem 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .menu-btn:hover {
+      background: #ff4b5c;
+      color: white;
+    }
+
+    h1 {
+      color: #ff4b5c;
+      margin-bottom: 0.5rem;
+    }
+
+    #stats {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 15px;
+    }
+
+    .hole {
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: inset 0 5px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 2rem;
+      transition: background 0.3s;
+    }
+
+    .mole {
+      background: #ffe8ed;
+    }
+
+    #start-btn {
+      margin-top: 1rem;
+      background: #ff4b5c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #start-btn:hover {
+      background: #e63b4c;
+    }

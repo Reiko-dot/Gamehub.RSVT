@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Memory Meadow — CozyGames</title>
+  <link rel="stylesheet" href="css/meadow.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="cozylogo.png" alt="CozyGames logo" class="logo" onerror="this.style.display='none'">
+    <h1>🌼 Memory Meadow</h1>
+    <p class="subtitle">Match the blossoms and watch the meadow bloom ✨</p>
+  </header>
+
+  <main class="main">
+    <div class="hud">
+      <div class="hud-item">
+        <strong>Moves</strong>
+        <span id="movesCount">0</span>
+      </div>
+
+      <div class="hud-item">
+        <strong>Time</strong>
+        <span id="timer">00:00</span>
+      </div>
+
+      <div class="hud-item">
+        <strong>Best</strong>
+        <span id="bestScore">—</span>
+      </div>
+
+      <div class="controls">
+        <button id="restart" class="btn">🔁 Restart</button>
+        <button id="menu" class="btn subtle">🏠 Menu</button>
+      </div>
+    </div>
+
+    <section class="board-wrap">
+      <div id="gameGrid" class="game-grid" role="grid" aria-label="Memory Meadow"></div>
+    </section>
+  </main>
+
+  <div id="winModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h2>🌸 Meadow Bloomed!</h2>
+      <p>
+        You finished in <span id="winTime">00:00</span> with <span id="winMoves">0</span> moves.
+      </p>
+      <p id="bestMessage" class="best-msg"></p>
+      <div class="modal-actions">
+        <button id="playAgain" class="btn">Play Again</button>
+        <button id="menuFromModal" class="btn subtle">🏠 Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <small>CozyGames • Memory Meadow • 2025</small>
+  </footer>
+
+  <script src="js/meadow.js"></script>
+</body>
+</html>

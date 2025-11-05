@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>☁️ Cloud Catcher</title>
+  <link rel="stylesheet" href="css/cloud.css">
+</head>
+<body>
+  <header>
+    <h1>☁️ Cloud Catcher</h1>
+    <p>Catch the happy clouds, avoid the raindrops, and race the clock!</p>
+  </header>
+
+  <main>
+    <canvas id="cloudCanvas" width="400" height="600"></canvas>
+
+    <div class="stats">
+      <p>⏱️ Time: <span id="timer">50</span>s</p>
+      <p>💨 Score: <span id="score">0</span></p>
+      <p>🏆 Best: <span id="bestScore">0</span></p>
+    </div>
+
+    <div class="controls">
+      <button id="restartBtn">🔄 Restart</button>
+      <button onclick="window.location.href='index.html'">🏠 Back to Hub</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with 💕 by You</p>
+  </footer>
+
+  <script src="js/cloud.js" defer></script>
+</body>
+</html>

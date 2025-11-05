@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feather Float 🕊️</title>
+  <link rel="stylesheet" href="css/feather.css" />
+</head>
+<body>
+  <a href="index.html" id="external-menu-link">
+    <button id="external-menu-button">🔙 Return to 🏠</button>
+  </a>
+
+  <div id="game-container">
+    <h1>Feather Float 🕊️</h1>
+
+    <div id="start-menu">
+      <p>Guide the feather through the pastel poles!</p>
+      <p>Press <strong>Spacebar</strong> or tap to float.</p>
+      <p>Best Drift: <span id="best-score-start">0</span></p>
+      <button id="start-button">Start Floating</button>
+    </div>
+
+    <canvas id="gameCanvas" width="640" height="420" style="display: none;"></canvas>
+
+    <div id="game-over-screen" style="display: none;">
+      <h2>Game Over 💫</h2>
+      <p id="game-over-message"></p>
+      <p>Score: <span id="final-score">0</span></p>
+      <p>Best Drift: <span id="best-score-end">0</span></p>
+      <button id="restart-button">Drift Again</button>
+    </div>
+  </div>
+
+  <script src="js/feather.js"></script>
+</body>
+</html>
