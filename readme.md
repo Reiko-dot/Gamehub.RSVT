@@ -43,3 +43,53 @@ Elke game heeft zijn eigen doel, besturing en moeilijkheidsgraad. De interface i
 1. Clone de repository:
    ```bash
    git clone https://github.com/Reiko-dot/Gamehub.RSVT.git
+
+
+## Ontwikkelweek. (AI exploration). 
+## Documentatie.
+
+## • Wat vinden we interessant aan AI?
+Hoe AI werkt. Dat je eigen ideeën en codes kan genereren door je eigen idee of een paar worden te typen. AI wordt tot nu door veel mensen gebruikt. AI zelf heeft zijn eigen positieve kanten maar ook een paar negatieve kanten. Het positieve kant is dat met AI hoef je niet alles zelf te bedenken en kan je het aan AI over laten. Maar Soms gaat dat niet al te soepel. Zelfs als je een schoonbeeld hebt over iets dat je wilt maken, gaat AI dat niet altijd goed genereren zoals je wilt.
+
+## •	Wat kunnen we maken dat we nog nooit eerder hebben gedaan?
+
+Misschien een website of een game.
+
+## •	Wat gaan we maken? (site/app/tool/plugin)
+
+Een website waar je verschillende games kan spelen
+
+## •	Hoe gaan we dat maken? (werkverdeling)
+
+Ik vraag AI om ideeën  of ik geef mijn ideeën  aan AI en dan kan het dat verwerken op iets wat ik had bedacht
+
+## •	Wat is het idee (concept) dat we gaan uitwerken?
+
+Een soort gamehub website waar je verschillende minigames kan spelen
+
+## •	Wat is de inspiratie achter het idee?
+
+Het inspiratie kwam het meest van AI maar ik vond het wel een leuk idee dus ik bleef op dat idee en ging zelf ook dingen bedenken om aan te passen 
+
+## •	Hoe willen we AI gebruiken om het te maken?
+Ik vraag AI de games en menu te genereren. Dat geldt ook voor de gameplay en bugs die later gefixt moeten worden.
+
+## •	Welke tools gebruikt.
+
+Tot nu gebruikt ik chatgpt voor de meeste dingen. Zelfs codes genereren. En dan ook wel copilot. Waarom ik ze gebruikt is, omdat chatgpt is wel makkelijk te gebruiken. Maar je kan het alleen gebruiken voor een limited tijd en hoeveel je dingen genereerd. Dus dat is niet al te goed. Als die tijd komt, zou ik dan copilot gebruiken voor backup. Ik heb ook Gemini van google gebruikt. Vanwege dat chatgpt soms niet werkte had ik gemini gebruikt.
+
+
+## Logboek.
+
+## Maandag. 3-11-25.
+Werken aan documentatie en ideeën bedenken. Ook start gemaakt aan coderen met AI.
+
+## Dinsdag 4-11-25
+Documentatie verder aangepast. Werken aan de code en opdracht. Het menu gemaakt en de secties arcade classics, relaxing games en fun zone gemaakt. De games snake, star hopper, bubble catcher, moonlight painter en memory meadow gemaakt.
+
+## Woensdag 5-11-25
+Een paar games aangepast zoals bubble catcher en de rest van gisteren. Ik heb vandaag gewerkt aan de games Garden whisperer, whack-a-mole. Fruit scramble en feather float gemaakt. Ik heb die games ook aangepast en geüpdatet. Ook document verder aangepast, zodat ik het kan inleveren.
+
+## Donderdag 6-11-25
+paar laatste dingen aangepast en ook documentatie aangepast. video gemaakt en ingeleverd met github repo.
+
