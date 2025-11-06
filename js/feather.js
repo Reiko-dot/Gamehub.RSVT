@@ -1,108 +1,119 @@
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-
-const startMenu = document.getElementById("start-menu");
-const startButton = document.getElementById("start-button");
-const gameOverScreen = document.getElementById("game-over-screen");
-const restartButton = document.getElementById("restart-button");
-const finalScoreDisplay = document.getElementById("final-score");
-const bestScoreStartDisplay = document.getElementById("best-score-start");
-const bestScoreEndDisplay = document.getElementById("best-score-end");
-const gameOverMessage = document.getElementById("game-over-message");
+// --- Setup & Elements ---
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const startMenu = document.getElementById('start-menu');
+const startButton = document.getElementById('start-button');
+const gameOverScreen = document.getElementById('game-over-screen');
+const restartButton = document.getElementById('restart-button');
+const finalScoreDisplay = document.getElementById('final-score');
+const gameOverMessage = document.getElementById('game-over-message');
+const bestScoreStartDisplay = document.getElementById('best-score-start');
+const bestScoreEndDisplay = document.getElementById('best-score-end');
 
 let gameActive = false;
 let score = 0;
-let bestScore = parseInt(localStorage.getItem("featherFloatBestScore") || "0");
-let feather, obstacles;
+let bestScore = localStorage.getItem('featherFloatBestScore')
+  ? parseInt(localStorage.getItem('featherFloatBestScore'))
+  : 0;
+let feather;
+let obstacles = [];
 
-const GRAVITY = 0.25;
-const LIFT = -5;
-const OBSTACLE_SPEED = 2.5;
-const OBSTACLE_INTERVAL = 90;
+// --- Game Settings ---
+const GRAVITY = 0.3;
+const LIFT = -6;
+const OBSTACLE_SPEED = 2;
+const OBSTACLE_INTERVAL = 150;
 
-// Feather setup
+// --- Feather definition ---
 feather = {
-  x: 100,
+  x: 60,
   y: canvas.height / 2,
   width: 20,
   height: 40,
   velocity: 0,
+  draw() {
+    // Feather shape with soft gradient
+    const gradient = ctx.createLinearGradient(this.x, this.y - this.height / 2, this.x, this.y + this.height / 2);
+    gradient.addColorStop(0, '#fef6ff');
+    gradient.addColorStop(1, '#dcb0ff');
+    ctx.fillStyle = gradient;
+    ctx.strokeStyle = '#b088f9';
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y - this.height / 2);
+    ctx.quadraticCurveTo(this.x + this.width / 2, this.y, this.x, this.y + this.height / 2);
+    ctx.quadraticCurveTo(this.x - this.width / 2, this.y, this.x, this.y - this.height / 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Feather stem
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y - this.height / 2);
+    ctx.lineTo(this.x, this.y + this.height / 2);
+    ctx.strokeStyle = '#c5a3ff';
+    ctx.stroke();
+  },
   update() {
     this.velocity += GRAVITY;
     this.y += this.velocity;
-    if (this.y < this.height / 2) {
+    if (this.y - this.height / 2 < 0) {
       this.y = this.height / 2;
       this.velocity = 0;
     }
   },
   lift() {
     this.velocity = LIFT;
-  },
-  draw() {
-    const gradient = ctx.createLinearGradient(this.x - 10, this.y - 20, this.x + 10, this.y + 20);
-    gradient.addColorStop(0, "#fff");
-    gradient.addColorStop(1, "#ffd6f6");
-    ctx.fillStyle = gradient;
-    ctx.strokeStyle = "#d2b5f5";
-    ctx.lineWidth = 1.3;
-
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y - 20);
-    ctx.quadraticCurveTo(this.x + 12, this.y, this.x, this.y + 20);
-    ctx.quadraticCurveTo(this.x - 12, this.y, this.x, this.y - 20);
-    ctx.fill();
-    ctx.stroke();
-
-    // Little feather line
-    ctx.strokeStyle = "#e3bdfc";
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y - 18);
-    ctx.lineTo(this.x, this.y + 18);
-    ctx.stroke();
-  },
+  }
 };
 
-// Pastel color options
-const colors = ["#ffc8dd", "#ffafcc", "#bde0fe", "#a2d2ff", "#fff0b3"];
-
+// --- Pastel obstacle poles (like Flappy Bird) ---
 function createObstacle() {
-  const gapHeight = 130;
-  const topHeight = Math.floor(Math.random() * 150) + 50;
+  const gapHeight = 150;
+  const minHeight = 50;
+  const maxTopPipeHeight = canvas.height - minHeight - gapHeight - minHeight;
+  const topHeight = Math.floor(Math.random() * maxTopPipeHeight) + minHeight;
+
+  // 🎨 Nice pastel colors
+  const colors = ['#ffc8dd', '#bde0fe', '#caffbf', '#ffd6a5', '#e0aaff'];
   const color = colors[Math.floor(Math.random() * colors.length)];
+
   return {
     x: canvas.width,
     width: 60,
     topHeight,
     bottomY: topHeight + gapHeight,
     color,
-    passed: false,
     draw() {
       ctx.fillStyle = this.color;
-      // soft rounded pastel poles
-      ctx.beginPath();
-      ctx.roundRect(this.x, 0, this.width, this.topHeight, 8);
-      ctx.roundRect(this.x, this.bottomY, this.width, canvas.height - this.bottomY, 8);
-      ctx.fill();
+      ctx.fillRect(this.x, 0, this.width, this.topHeight);
+      ctx.fillRect(this.x, this.bottomY, this.width, canvas.height - this.bottomY);
     },
     update() {
       this.x -= OBSTACLE_SPEED;
-    },
+    }
   };
 }
 
+// --- Collision detection ---
 function checkCollision() {
   if (feather.y + feather.height / 2 > canvas.height) {
-    gameOver("You drifted too low 💫");
+    gameOver('You let the feather fall to the ground.');
     return true;
   }
+
   for (const obs of obstacles) {
-    const right = feather.x + feather.width / 2;
-    const left = feather.x - feather.width / 2;
-    const top = feather.y - feather.height / 2;
-    const bottom = feather.y + feather.height / 2;
-    if (right > obs.x && left < obs.x + obs.width) {
-      if (top < obs.topHeight || bottom > obs.bottomY) {
-        gameOver("You touched a pastel pole 💕");
+    const featherRight = feather.x + feather.width / 2;
+    const featherLeft = feather.x - feather.width / 2;
+    const featherTop = feather.y - feather.height / 2;
+    const featherBottom = feather.y + feather.height / 2;
+    const obsRight = obs.x + obs.width;
+    const obsLeft = obs.x;
+
+    if (featherRight > obsLeft && featherLeft < obsRight) {
+      if (featherTop < obs.topHeight || featherBottom > obs.bottomY) {
+        gameOver('You touched the pastel pole — try again!');
         return true;
       }
     }
@@ -110,55 +121,67 @@ function checkCollision() {
   return false;
 }
 
+// --- Score update ---
 function updateScore() {
-  for (const obs of obstacles) {
+  obstacles.forEach(obs => {
     if (obs.x + obs.width < feather.x && !obs.passed) {
       score++;
       obs.passed = true;
     }
-  }
+  });
 }
 
-function gameLoop(frame = 0) {
+// --- Main game loop ---
+function gameLoop() {
   if (!gameActive) return;
 
-  // background
-  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  sky.addColorStop(0, "#fff9ff");
-  sky.addColorStop(1, "#ffeefb");
-  ctx.fillStyle = sky;
+  // Background
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#fef6ff';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  // Feather
   feather.update();
   feather.draw();
 
-  if (frame % OBSTACLE_INTERVAL === 0) {
+  // Obstacles
+  if (gameLoop.frame % OBSTACLE_INTERVAL === 0) {
     obstacles.push(createObstacle());
   }
+  gameLoop.frame++;
 
-  obstacles.forEach(o => {
-    o.update();
-    o.draw();
+  obstacles.forEach(obs => {
+    obs.update();
+    obs.draw();
   });
-  obstacles = obstacles.filter(o => o.x + o.width > 0);
 
+  obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
+
+  // Collision & scoring
   if (checkCollision()) return;
-
   updateScore();
 
-  ctx.fillStyle = "#7e6b8f";
-  ctx.font = "20px Poppins";
+  // UI
+  ctx.fillStyle = '#b088f9';
+  ctx.font = '20px Poppins, Arial';
+  ctx.textAlign = 'left';
   ctx.fillText(`Drift: ${score}`, 10, 30);
-  ctx.fillText(`Best: ${bestScore}`, 10, 55);
+  ctx.fillText(`Best: ${bestScore}`, 10, 60);
 
-  requestAnimationFrame(() => gameLoop(frame + 1));
+  requestAnimationFrame(gameLoop);
 }
+gameLoop.frame = 0;
 
+// --- Screen management ---
 function showStartScreen() {
   gameActive = false;
-  canvas.style.display = "none";
-  gameOverScreen.style.display = "none";
-  startMenu.style.display = "flex";
+  canvas.style.display = 'none';
+  gameOverScreen.style.display = 'none';
+  startMenu.style.display = 'flex';
+
+  bestScore = localStorage.getItem('featherFloatBestScore')
+    ? parseInt(localStorage.getItem('featherFloatBestScore'))
+    : 0;
   bestScoreStartDisplay.textContent = bestScore;
 }
 
@@ -168,35 +191,47 @@ function startGame() {
   feather.y = canvas.height / 2;
   feather.velocity = 0;
   obstacles = [];
-  startMenu.style.display = "none";
-  gameOverScreen.style.display = "none";
-  canvas.style.display = "block";
+  gameLoop.frame = 0; // ✅ important reset
+
+  startMenu.style.display = 'none';
+  gameOverScreen.style.display = 'none';
+  canvas.style.display = 'block';
+
   requestAnimationFrame(gameLoop);
 }
 
-function gameOver(msg) {
+function gameOver(message) {
   gameActive = false;
+
   if (score > bestScore) {
     bestScore = score;
-    localStorage.setItem("featherFloatBestScore", bestScore);
+    localStorage.setItem('featherFloatBestScore', bestScore);
   }
+
   finalScoreDisplay.textContent = score;
+  gameOverMessage.textContent = message;
   bestScoreEndDisplay.textContent = bestScore;
-  gameOverMessage.textContent = msg;
-  canvas.style.display = "none";
-  gameOverScreen.style.display = "flex";
+
+  canvas.style.display = 'none';
+  gameOverScreen.style.display = 'flex';
 }
 
-startButton.addEventListener("click", startGame);
-restartButton.addEventListener("click", startGame);
+// --- Controls ---
+startButton.addEventListener('click', startGame);
+restartButton.addEventListener('click', startGame);
 
-document.addEventListener("keydown", e => {
-  if (e.code === "Space") {
-    if (gameActive) feather.lift();
-    else if (startMenu.style.display === "flex") startGame();
+function handleInput(e) {
+  if (e.code === 'Space' || e.type === 'mousedown' || e.type === 'touchstart') {
+    if (gameActive) {
+      feather.lift();
+    } else if (startMenu.style.display === 'flex') {
+      startGame();
+    }
   }
-});
-canvas.addEventListener("mousedown", () => { if (gameActive) feather.lift(); });
-canvas.addEventListener("touchstart", () => { if (gameActive) feather.lift(); });
+}
+document.addEventListener('keydown', handleInput);
+canvas.addEventListener('mousedown', handleInput);
+canvas.addEventListener('touchstart', handleInput);
 
+// --- Initialize ---
 showStartScreen();
